@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALMA & SANGUE | Grimório Visceral</title>
+    <style>
+        :root {
+            --blood: #8a0303;
+            --gold: #d4af37;
+            --black: #050505;
+            --text: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', 'Georgia', serif;
+            background-color: var(--black);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Tipografia Importada */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap');
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--blood); }
+            50% { opacity: 0.8; text-shadow: 0 0 20px red; }
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- TELA DE INTRODUÇÃO --- */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 1s ease;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .embers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .ember {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: orangered;
+            border-radius: 50%;
+            box-shadow: 0 0 10px orange;
+        }
+
+        .intro-content {
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--blood);
+            background: rgba(10, 0, 0, 0.9);
+            box-shadow: 0 0 50px rgba(138, 3, 3, 0.3);
+        }
+
+        .intro-title {
+            font-size: 3.5rem;
+            color: var(--blood);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: flicker 3s infinite;
+            margin-bottom: 0.5rem;
+        }
+
+        .intro-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .intro-btn {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+        }
+
+        .intro-btn:hover {
+            background: var(--blood);
+            border-color: var(--blood);
+            color: white;
+            box-shadow: 0 0 20px var(--blood);
+        }
+
+        /* --- TELA PRINCIPAL (GRID) --- */
+        .main-screen {
+            min-height: 100vh;
+            padding: 2rem;
+            display: none;
+            background: radial-gradient(circle at center, #1a0505 0%, #000000 100%);
+        }
+
+        .main-screen.active {
+            display: block;
+            animation: fadeIn 1s forwards;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .header h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.8);
+            border-left: 4px solid var(--card-color);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--card-color);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: bold;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        .card-footer {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+        }
+
+        .play-icon {
+            color: var(--card-color);
+            font-size: 1.2rem;
+        }
+
+        /* --- TELA DE DETALHES (PLAYER) --- */
+        .detail-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 100;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .detail-screen.active {
+            display: block;
+        }
+
+        .detail-header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .back-btn {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 50vh;
+            background: black;
+            position: relative;
+            box-shadow: 0 10px 50px rgba(138, 3, 3, 0.2);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .info-container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-subtitle {
+            color: var(--blood);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .info-desc {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .info-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-left: 2px solid var(--gold);
+        }
+
+        .meta-label {
+            display: block;
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .meta-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .intro-title { font-size: 2.5rem; }
+            .grid-container { grid-template-columns: 1fr; }
+            .info-meta { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="intro-screen" id="introScreen">
+        <div class="embers" id="embers"></div>
+        <div class="intro-content">
+            <h1 class="intro-title">ALMA & SANGUE</h1>
+            <p class="intro-subtitle">Grimório Falado das Pombagiras</p>
+            <button class="intro-btn" onclick="enterApp()">Pedir Licença</button>
+        </div>
+    </div>
+
+    <div class="main-screen" id="mainScreen">
+        <div class="header">
+            <h1>O Acervo Sagrado</h1>
+            <p style="font-family: 'Montserrat'; color: #888;">Escolha sua guia e ouça o chamado.</p>
+        </div>
+        <div class="grid-container" id="gridContainer">
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: #555; font-family: 'Montserrat'; font-size: 0.8rem; padding-bottom: 2rem;">
+            <p>Laroyê. Mojubá. Respeite o Sagrado.</p>
+            <p style="margin-top: 5px;">Desenvolvido para Estudos. Todos os direitos reservados - By; Alexia Melusine</p>
+        </div>
+    </div>
+
+    <div class="detail-screen" id="detailScreen">
+        <div class="detail-header">
+            <button class="back-btn" onclick="closeDetail()">✕ Voltar ao Altar</button>
+        </div>
+        <div class="video-container">
+            <iframe id="youtubePlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="info-container">
+            <h1 class="info-title" id="dTitle">Titulo</h1>
+            <h2 class="info-subtitle" id="dSubtitle">Subtitulo</h2>
+            
+            <div class="info-meta">
+                <div class="meta-box">
+                    <span class="meta-label">Domínio</span>
+                    <span class="meta-value" id="dDomain">Amor</span>
+                </div>
+                <div class="meta-box">
+                    <span class="meta-label">Oferenda</span>
+                    <span class="meta-value" id="dOffer">Rosas</span>
+                </div>
+            </div>
+
+            <p class="info-desc" id="dDesc">Descrição...</p>
+        </div>
+    </div>
+
+    <script>
+        // ========== CÓDIGO DO GRIMÓRIO ==========
+        // --- DADOS CORRIGIDOS E ALINHADOS COM OS VÍDEOS ---
+        const grimorio = [
+            {
+                id: "t7wzf_bic80",
+                nome: "Quem são as Pombagiras",
+                titulo: "O Despertar da Força",
+                categoria: "PORTAL",
+                desc: "Esqueça o medo e o preconceito. Antes de entrar na gira, é preciso pedir licença. Aqui não habita o mal, habita a Lei. Abra seus ouvidos para a verdadeira natureza feminina.",
+                dominio: "Iniciação e Fundamentos",
+                oferenda: "Mente Aberta e Respeito",
+                cor: "#333333"
+            },
+            {
+                id: "3_hAUakw8kY",
+                nome: "Desmistificando as Pombagiras",
+                titulo: "O Despertar do Conhecimento",
+                categoria: "FUNDAMENTOS",
+                desc: "Antes de entrar na gira, entenda a força. Pombagira não é demônio, é lei. É a força da natureza feminina que não se curva. Comece por aqui.",
+                dominio: "Conhecimento e Sabedoria",
+                oferenda: "Respeito e Mente Aberta",
+                cor: "#333333"
+            },
+            {
+                id: "4SN00P-BS3U",
+                nome: "Maria Padilha",
+                titulo: "A Rainha das Encruzilhadas",
+                categoria: "FOGO",
+                desc: "A Rainha absoluta. Ela não pede, ela ordena. Padilha ensina sobre poder pessoal, domínio, estratégia e como governar a própria vida sem se curvar a ninguém.",
+                dominio: "Poder, Sedução, Domínio, Feitiçaria",
+                oferenda: "Champanhe, Rosas Vermelhas, Joias, Perfumes Caros",
+                cor: "#8a0303"
+            },
+            {
+                id: "iprg-CBJtt0",
+                nome: "Maria Mulambo",
+                titulo: "A Alquimista da Dor",
+                categoria: "TERRA",
+                desc: "Do lixo ao luxo. Mulambo é a senhora da humildade que cura o coração partido e restaura a dignidade de quem foi humilhado. Transforma dor em força.",
+                dominio: "Cura Emocional, Humildade, Restauração",
+                oferenda: "Vinho Branco Doce, Rosas Brancas ou Amarelas",
+                cor: "#4b0082"
+            },
+            {
+                id: "S3LT3Ozzt2k",
+                nome: "Maria Quitéria",
+                titulo: "A Guerreira Imortal",
+                categoria: "AÇO",
+                desc: "A mulher que foi à guerra. Quitéria é espada, é defesa, é corte certeiro. Protege contra perseguições, demandas e ensina a coragem visceral do campo de batalha.",
+                dominio: "Guerra, Proteção, Coragem, Quebra de Feitiços",
+                oferenda: "Whisky, Cigarrilha, Cravos Vermelhos",
+                cor: "#2f4f4f"
+            },
+            {
+                id: "zCX1TF8IPZw",
+                nome: "Rosa Caveira",
+                titulo: "A Guardiã dos Mortos",
+                categoria: "OSSOS",
+                desc: "A verdade nua e crua. Rosa Caveira caminha entre os vivos e os mortos para ensinar que a vaidade é passageira. Senhora da justiça kármica e da evolução espiritual.",
+                dominio: "Ancestralidade, Justiça Kármica, Morte e Renascimento",
+                oferenda: "Rosas Amarelas, Velas Pretas e Brancas, Cachaça",
+                cor: "#000000"
+            },
+            {
+                id: "nlQ7Jh5yccI",
+                nome: "Dama da Noite",
+                titulo: "A Senhora dos Segredos",
+                categoria: "NOITE",
+                desc: "O manto estrelado que cobre os mistérios. Ela vê o que ninguém vê nas sombras. Senhora da intuição, dos amores proibidos e dos segredos que só a noite guarda.",
+                dominio: "Mistérios, Vidência, Intuição, Amores Noturnos",
+                oferenda: "Licor de Menta, Rosas Roxas Escuras, Perfume",
+                cor: "#191970"
+            },
+            {
+                id: "vU5NXfXAPTM",
+                nome: "Pombagira Sete Saias",
+                titulo: "O Furacão Colorido",
+                categoria: "VENTO",
+                desc: "A alegria em movimento. Sete Saias gira em sete caminhos diferentes para trazer renovação, movimento, festa e tirar você da estagnação depressiva.",
+                dominio: "Amor, Alegria, Movimento, Dança",
+                oferenda: "Fitas Coloridas, Doces, Flores Variadas",
+                cor: "#c71585"
+            },
+            {
+                id: "YX38d26TDRk",
+                nome: "Pombagira Cigana",
+                titulo: "A Nômade do Destino",
+                categoria: "ESTRADA",
+                desc: "A dona dos caminhos abertos. Com seu baralho, música e dança, ela ensina que prosperidade e liberdade caminham juntas. O ouro brilha para quem tem alma livre. Optchá!",
+                dominio: "Prosperidade, Sorte, Liberdade, Oráculos",
+                oferenda: "Frutas, Moedas Douradas, Vinho Tinto, Lenço",
+                cor: "#d4af37"
+            },
+            {
+                id: "qYF2w3Mwp3g",
+                nome: "Maria Navalha",
+                titulo: "A Malandra da Lapa",
+                categoria: "RUA",
+                desc: "A mestra da sobrevivência urbana. Navalha ensina o jogo de cintura, a malandragem honesta e como se defender nas ruas. Para quem precisa ganhar o pão com esperteza.",
+                dominio: "Malandragem, Negócios, Jogo, Proteção de Rua",
+                oferenda: "Cerveja, Sardinha, Baralho, Cigarro",
+                cor: "#b22222"
+            },
+            {
+                id: "NsPxaDZrs8E",
+                nome: "Pombagira da Praia",
+                titulo: "A Sereia das Ondas",
+                categoria: "ÁGUA",
+                desc: "A sereia de negro e prata. O banho de sal grosso da alma. Ela lava as mágoas profundas, limpa energias pesadas e leva o mal para o fundo do mar com as ondas.",
+                dominio: "Limpeza Espiritual, Emoções, Renovação",
+                oferenda: "Champanhe Branca, Rosas Brancas, Perfume Doce",
+                cor: "#008b8b"
+            },
+            {
+                id: "80dRxkEQ34Y",
+                nome: "Maria Farrapo",
+                titulo: "A Rasgada e Santa",
+                categoria: "CAOS",
+                desc: "A loucura que cura. Ela rasga as convenções e costura a sanidade. Para quem está à beira do colapso mental, Farrapo é remédio e acolhimento visceral.",
+                dominio: "Saúde Mental, Desobsessão, Libertação",
+                oferenda: "Cachaça Branca, Fumo de Rolo, Pano Rasgado",
+                cor: "#800080"
+            },
+            {
+                id: "bFpbM5uHric",
+                nome: "Pombagira Menina",
+                titulo: "O Encanto da Juventude",
+                categoria: "JARDIM",
+                desc: "A juventude eterna do espírito. Ela traz de volta o brilho nos olhos, a vaidade leve, a renovação e o encanto para quem se sente cansado da vida adulta.",
+                dominio: "Beleza, Vaidade, Renovação, Novos Ciclos",
+                oferenda: "Doces Finos, Balas, Perfumes Suaves, Flores Delicadas",
+                cor: "#ff69b4"
+            },
+            {
+                id: "Y_s-V-hXQsk",
+                nome: "Pombagira da Figueira",
+                titulo: "A Feiticeira das Raízes",
+                categoria: "RAIZ",
+                desc: "A anciã da árvore sagrada. Sabedoria ancestral, cura pelas ervas, feitiços da terra e a força inabalável de quem tem raízes profundas enterradas no chão.",
+                dominio: "Magia Antiga, Fertilidade, Cura com Ervas, Feitiçaria",
+                oferenda: "Figos, Vinho Tinto, Mel, Folhas",
+                cor: "#556b2f"
+            },
+            {
+                id: "xHE4sCuYIM4",
+                nome: "A Gira das 12 Luas",
+                titulo: "A Gira Girou, Laroyê!",
+                categoria: "POMBAGIRAS",
+                desc: "O agradecimento final às Guardiãs da Encruzilhada. Que a força delas permaneça com você após sair do terreiro. Mojubá. Laroyê!",
+                dominio: "Gratidão e Respeito",
+                oferenda: "Uma Vela Acesa e Coração Limpo",
+                cor: "#333333"
+            }
+        ];
+
+        // LÓGICA DO APP
+        const gridContainer = document.getElementById('gridContainer');
+        const detailScreen = document.getElementById('detailScreen');
+        const youtubePlayer = document.getElementById('youtubePlayer');
+
+        // Gerar Partículas (Embers)
+        function createEmbers() {
+            const container = document.getElementById('embers');
+            const emberCount = 30;
+            
+            for(let i=0; i<emberCount; i++){
+                const ember = document.createElement('div');
+                ember.classList.add('ember');
+                
+                // Randomizar posição e animação
+                ember.style.left = Math.random() * 100 + '%';
+                ember.style.animation = `rise ${2 + Math.random() * 3}s linear infinite`;
+                ember.style.animationDelay = Math.random() * 2 + 's';
+                ember.style.opacity = Math.random();
+                
+                container.appendChild(ember);
+            }
+        }
+
+        // Entrar no App
+        function enterApp() {
+            document.getElementById('introScreen').classList.add('hidden');
+            document.getElementById('mainScreen').classList.add('active');
+            renderGrid();
+        }
+
+        // Renderizar Cards
+        function renderGrid() {
+            gridContainer.innerHTML = '';
+            grimorio.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.style.setProperty('--card-color', item.cor);
+                card.onclick = () => openDetail(item);
+
+                card.innerHTML = `
+                    <div class="card-content">
+                        <span class="card-category" style="color:${item.cor}">${item.categoria}</span>
+                        <h3>${item.nome}</h3>
+                        <p>${item.titulo}</p>
+                        <div class="card-footer">
+                            <span style="font-size: 0.8rem; color: #666;">CLIQUE PARA OUVIR</span>
+                            <span class="play-icon" style="color:${item.cor}">▶</span>
+                        </div>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        // Abrir Player
+        function openDetail(item) {
+            detailScreen.classList.add('active');
+            
+            // Carregar Textos
+            document.getElementById('dTitle').innerText = item.nome;
+            document.getElementById('dTitle').style.color = item.cor;
+            document.getElementById('dSubtitle').innerText = item.titulo;
+            document.getElementById('dDesc').innerText = item.desc;
+            document.getElementById('dDomain').innerText = item.dominio;
+            document.getElementById('dOffer').innerText = item.oferenda;
+            
+            // Carregar Vídeo do YouTube
+            youtubePlayer.src = `https://www.youtube.com/embed/${item.id}?autoplay=1&rel=0&modestbranding=1&controls=1`;
+        }
+
+        // Fechar Player
+        function closeDetail() {
+            detailScreen.classList.remove('active');
+            youtubePlayer.src = ""; // Parar vídeo
+        }
+
+        // Iniciar Efeitos
+        createEmbers();
+
+    </script>
+</body>
+</html>
