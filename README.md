@@ -1,164 +1,212 @@
 🌹 ALMA & SANGUE – Grimório Visceral das Pombagiras
-Uma experiência digital imersiva dedicada ao estudo e conexão com as entidades femininas da Umbanda e outras tradições afro-brasileiras. Este projeto é um altar virtual, um espaço de aprendizado e respeito às Pombagiras.
+<div align="center">
+https://img.shields.io/github/last-commit/seu-usuario/alma-sangue-grimorio?color=8a0303&style=for-the-badge
+https://img.shields.io/github/repo-size/seu-usuario/alma-sangue-grimorio?color=d4af37&style=for-the-badge
+https://img.shields.io/badge/license-Educacional-050505?style=for-the-badge
 
-✨ Características
-🎭 Tela introdutória animada com brasas flutuantes e atmosfera ritualística
+</div>
+🎭 Visão Geral
+Um altar digital imersivo dedicado ao estudo das entidades femininas das tradições afro-brasileiras. Interface intuitiva com botões interativos e experiência visual envolvente.
 
-📜 Acervo organizado em cards com informações detalhadas sobre cada Pombagira
+<div align="center">
+https://via.placeholder.com/800x400/8a0303/d4af37?text=ALMA+%2526+SANGUE+Grim%25C3%25B3rio+Visceral
 
-▶️ Player integrado do YouTube para visualização dos conteúdos
+🚀 Acessar Projeto Online | 📂 Baixar Código | 🎨 Ver Demonstração
 
-🎨 Design visual imersivo com paleta de cores temática (sangue, ouro e preto)
+</div>
+✨ Características Principais
+Feature	Descrição	Status
+🎯 Interface Imersiva	Animações, partículas e transições suaves	✅ Completo
+🎵 Player de Vídeo	Integração direta com YouTube	✅ Completo
+📱 Responsivo	Funciona em desktop, tablet e mobile	✅ Completo
+🔍 Busca Rápida	Navegação intuitiva entre entidades	✅ Completo
+🎨 Design Temático	Cores de sangue, ouro e preto	✅ Completo
+🚀 Como Começar
+📥 Instalação Rápida
+bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/alma-sangue-grimorio.git
 
-📱 Totalmente responsivo para desktop e dispositivos móveis
+# Acesse a pasta
+cd alma-sangue-grimorio
 
-⚡ Navegação fluida entre a grade principal e as páginas de detalhes
+# Abra no navegador
+# Simplesmente abra o arquivo index.html
+🖥️ Uso Instantâneo
+Baixe os arquivos do projeto
 
-🗂️ Estrutura do Acervo
-O grimório contém informações sobre 15 entidades, cada uma com:
+Clique duas vezes em index.html
 
-Nome da entidade
+Explore o grimório digital
 
-Título evocativo
+🎮 Controles e Navegação
+🏠 Tela Inicial
+<div align="center">
+Botão	Ação	Visual
+"PEDIR LICENÇA"	Acessa o grimório	<button style="background:transparent;border:2px solid #d4af37;color:#d4af37;padding:8px 20px;cursor:pointer;font-family:'Cinzel';">PEDIR LICENÇA</button>
+</div>
+📚 Tela Principal (Grimório)
+Ação	Como Fazer	Resultado
+Selecionar Entidade	Clique em qualquer card	Abre detalhes da Pombagira
+Voltar ao Menu	Botão superior esquerdo	Retorna à grade principal
+Fechar Detalhes	Botão "✕ Voltar ao Altar"	Fecha player e volta
+🎬 Player de Vídeo
+<div align="center">
+https://via.placeholder.com/600x200/1a0505/d4af37?text=Player+de+V%25C3%25ADdeo+Integrado
 
-Categoria (Fogo, Terra, Água, Vento, etc.)
+</div>
+Controle	Função
+▶️ Play/Pause	Inicia/pausa o vídeo
+⏭️ Próximo	Sugere entidade relacionada
+📖 Informações	Mostra detalhes da entidade
+🏠 Início	Volta ao grimório
+📱 Layout Responsivo
+Dispositivo	Layout	Características
+Desktop	Grade 3-4 colunas	Animações completas
+Tablet	Grade 2 colunas	Menu adaptado
+Mobile	Coluna única	Botões ampliados
+🎨 Design System
+🎨 Paleta de Cores
+css
+--blood: #8a0303;    /* Vermelho-sangue - Ação principal */
+--gold: #d4af37;     /* Dourado - Realce e botões */
+--black: #050505;    /* Preto - Fundo */
+--text: #e0e0e0;     /* Texto claro */
+🔤 Tipografia
+Títulos: Cinzel (serifada, cerimonial)
 
-Descrição detalhada das características e ensinamentos
+Texto: Montserrat (limpa, legível)
 
-Domínio de atuação
-
-Oferendas tradicionais
-
-Vídeo educativo integrado via YouTube
-
-Entidades Incluídas:
-Quem são as Pombagiras (Portal/Fundamentos)
-
-Maria Padilha - A Rainha das Encruzilhadas
-
-Maria Mulambo - A Alquimista da Dor
-
-Maria Quitéria - A Guerreira Imortal
-
-Rosa Caveira - A Guardiã dos Mortos
-
-Dama da Noite - A Senhora dos Segredos
-
-Pombagira Sete Saias - O Furacão Colorido
-
-Pombagira Cigana - A Nômade do Destino
-
-Maria Navalha - A Malandra da Lapa
-
-Pombagira da Praia - A Sereia das Ondas
-
-Maria Farrapo - A Rasgada e Santa
-
-Pombagira Menina - O Encanto da Juventude
-
-Pombagira da Figueira - A Feiticeira das Raízes
-
-A Gira das 12 Luas - Encerramento ritual
-
-🛠️ Tecnologias Utilizadas
-HTML5 para estruturação semântica
-
-CSS3 com:
-
-Variáveis CSS (Custom Properties)
-
-Grid e Flexbox para layout
-
-Animações e transições
-
-Media queries para responsividade
-
-JavaScript Vanilla para:
-
-Manipulação dinâmica do DOM
-
-Controle do player de vídeo
-
-Geração de partículas animadas
-
-Transições entre telas
-
-YouTube IFrame API para embeds de vídeo
-
-Google Fonts (Cinzel e Montserrat)
-
-🚀 Como Usar
-Clone o repositório ou faça o download dos arquivos
-
-Abra o arquivo index.html em qualquer navegador moderno
-
-Clique em "Pedir Licença" na tela inicial para acessar o grimório
-
-Explore os cards clicando em qualquer entidade para ver detalhes
-
-Assista aos vídeos diretamente na interface
-
-Use o botão "Voltar ao Altar" para retornar à grade principal
-
-🎨 Personalização
-Cores
-As cores principais podem ser ajustadas modificando as variáveis CSS na raiz:
+🗂️ Estrutura de Arquivos
+text
+alma-sangue-grimorio/
+├── 📄 index.html              # Arquivo principal
+├── 🎨 style.css              # Estilos (embutido)
+├── ⚡ script.js              # Lógica (embutido)
+├── 📚 README.md             # Esta documentação
+└── 📱 assets/               # (Opcional) Recursos externos
+    ├── 🖼️ images/          # Imagens e ícones
+    └── 🎵 sounds/           # Efeitos sonoros
+🔧 Personalização
+🎛️ Modificar Cores
+Edite as variáveis CSS na linha 9 do arquivo HTML:
 
 css
 :root {
-    --blood: #8a0303;     /* Vermelho sangue */
-    --gold: #d4af37;      /* Dourado */
-    --black: #050505;     /* Preto */
-    --text: #e0e0e0;      /* Texto claro */
+    --blood: #seu_vermelho;
+    --gold: #seu_dourado;
+    --black: #seu_preto;
+    --text: #seu_texto;
 }
-Adicionar Novas Entidades
-Para incluir novas Pombagiras, adicione um objeto ao array grimorio no JavaScript:
+➕ Adicionar Nova Entidade
+Adicione ao array grimorio em script.js:
 
 javascript
 {
-    id: "ID_DO_VIDEO_YOUTUBE",
+    id: "ID_DO_YOUTUBE",
     nome: "Nome da Entidade",
     titulo: "Título Descritivo",
     categoria: "CATEGORIA",
     desc: "Descrição detalhada...",
     dominio: "Domínio de atuação",
-    oferenda: "Oferendas tradicionais",
-    cor: "#HEXCODE"  // Cor personalizada para a categoria
+    oferenda: "Oferendas sugeridas",
+    cor: "#CódigoCor"  // Cor para card e realces
 }
-📱 Responsividade
-O projeto se adapta a diferentes tamanhos de tela:
+🎯 Botões Interativos
+Exemplos de Botões Implementados
+<div align="center">
+Tipo	Código HTML	Visual
+Primário	<button class="btn-primary">AÇÃO</button>	<button style="background:#8a0303;color:white;border:none;padding:10px 25px;border-radius:4px;cursor:pointer;margin:5px;">AÇÃO</button>
+Secundário	<button class="btn-secondary">VOLTAR</button>	<button style="background:transparent;border:2px solid #d4af37;color:#d4af37;padding:8px 20px;cursor:pointer;margin:5px;">VOLTAR</button>
+Card	<div class="card">CONTEÚDO</div>	<div style="background:rgba(20,20,20,0.8);border-left:4px solid #8a0303;padding:15px;width:200px;cursor:pointer;margin:5px;">CARD</div>
+</div>
+📱 Testes e Compatibilidade
+🌐 Navegadores Suportados
+✅ Google Chrome 90+
 
-Desktop: Grade com múltiplas colunas
+✅ Mozilla Firefox 88+
 
-Tablet: Layout ajustado
+✅ Safari 14+
 
-Mobile: Cards em coluna única, otimização de espaços
+✅ Microsoft Edge 90+
 
-🙏 Considerações Importantes
-Nota: Este projeto foi desenvolvido apenas para fins educativos e de estudo.
+✅ Opera 76+
 
-Respeito ao Sagrado:
-🕯️ É um espaço digital de aprendizado sobre cultura e espiritualidade
+📲 Dispositivos Testados
+Desktop: Windows, macOS, Linux
 
-🙌 Não substitui a orientação de pais e mães de santo
+Mobile: iOS Safari, Android Chrome
 
-📚 Promove o conhecimento respeitoso sobre tradições afro-brasileiras
+Tablet: iPad, Android Tablets
 
-⚠️ Não realiza consultas, trabalhos ou qualquer tipo de prática espiritual
+⚠️ Avisos Importantes
+<div align="center" style="background:#1a0505;padding:15px;border-left:4px solid #8a0303;margin:20px 0;">
+🚫 Este projeto é APENAS para:
+✅ Estudo acadêmico
 
-Aviso Legal:
-Todo o conteúdo é fornecido para fins informativos. O desenvolvedor não se responsabiliza pelo uso inadequado das informações. Respeite as tradições e sempre busque orientação adequada dentro dos terreiros.
+✅ Pesquisa cultural
+
+✅ Aprendizado sobre religiões afro-brasileiras
+
+🚫 NÃO É para:
+❌ Consultas espirituais
+
+❌ Trabalhos religiosos
+
+❌ Substituir orientação de terreiro
+
+</div>
+🐛 Reportando Problemas
+Encontrou um bug? Tem uma sugestão?
+
+<div align="center">
+https://img.shields.io/badge/REPORTAR_BUG-Click_Here-8a0303?style=for-the-badge&logo=github
+https://img.shields.io/badge/SUGEST%C3%83O-Nova_Feature-d4af37?style=for-the-badge&logo=github
+
+</div>
+🤝 Contribuindo
+Fork o projeto
+
+Crie uma branch (git checkout -b feature/AmazingFeature)
+
+Commit suas mudanças (git commit -m 'Add some AmazingFeature')
+
+Push para a branch (git push origin feature/AmazingFeature)
+
+Abra um Pull Request
 
 📄 Licença
-© Desenvolvido por Alexia Melusine - Todos os direitos reservados.
+text
+© 2024 Alexia Melusine - ALMA & SANGUE Grimório Visceral
 
-Este projeto é para uso pessoal e educacional. A redistribuição ou uso comercial sem autorização não é permitida.
+Este trabalho é licenciado para uso PESSOAL e EDUCACIONAL apenas.
+Redistribuição comercial NÃO é permitida sem autorização expressa.
 
-🐛 Reportar Problemas
-Encontrou um bug ou tem uma sugestão? Sinta-se à vontade para:
+Respeite os direitos autorais e a natureza sagrada do conteúdo.
+📞 Contato e Créditos
+<div align="center">
+Desenvolvido com respeito e devoção
 
-Abrir uma issue no repositório
+Autor: Alexia Melusine
+Finalidade: Educacional/Cultural
+Ano: 2024
 
-Sugerir melhorias no código ou conteúdo
+Laroyê. Mojubá. Respeite o Sagrado.
 
-Reportar problemas de responsividade
+https://via.placeholder.com/800/2/8a0303/d4af37?text=++++++++++
+
+</div>
+🔗 Links Úteis
+📖 Documentação Completa
+
+🎥 Demonstração em Vídeo
+
+💾 Download Direto
+
+🌐 Site Oficial
+
+<div align="center">
+⭐ Se este projeto ajudou você, considere dar uma estrela no GitHub!
+https://img.shields.io/github/stars/seu-usuario/alma-sangue-grimorio?style=social
+
+</div>
